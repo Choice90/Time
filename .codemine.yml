@@ -1,0 +1,30 @@
+version: 1.0
+interrupt: none
+executeOn: runner
+runnerTags:
+- CM_Runner
+- windows_agent
+runnerStrategy: sticky
+jobs:
+  test:
+    description: ''
+    type: source-checkout
+    stage: StageOne
+    timeout: 30
+    priority: major
+    parameters:
+      branch: main
+    when: immediate
+    interruptible: 'false'
+image:
+  type: CodeMine
+  path: ubuntu:latest
+  resetEntryPoint: false
+  publicImage: false
+  shell: sh
+  pullPolicy: system
+  resourceProfile: custom
+  customResources:
+    memory: 100
+stages:
+- StageOne
